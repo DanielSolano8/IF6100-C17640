@@ -21,11 +21,12 @@ var result = handler.registerUser(
 );
 
 
-        return switch (result){
-            case RegisterUserHandler.Result.Succes succes ->
-                succes.message();
+        return switch (result) {
+            case RegisterUserHandler.Result.Succes success -> success.message();
             case RegisterUserHandler.Result.InvalidData invalidData ->
-                "Invalid data: " + String.join(",",invalidData.fields());
+                    "Invalid data: " + String.join(", ", invalidData.fields());
+            case RegisterUserHandler.Result.EmailAlreadyExists emailAlreadyExists -> null;
         };
+
     }
 }
