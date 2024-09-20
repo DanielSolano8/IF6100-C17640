@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "0564659b-8c48-4f6b-8358-ef1e0f0ec539",
+		"name": "Tarea-SpringBoot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "36556045"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"SALA1\",\r\n  \"createdBy\": \"RASTA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/C17640/room/create"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/C17640/room/join",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"52a73d38-ad07-43a5-9b76-9063b13f4a66\",\r\n  \"alias\": \"JAVANKA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/C17640/room/join"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/C17640/room/message",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"52a73d38-ad07-43a5-9b76-9063b13f4a66\",\r\n  \"alias\": \"JAVANKA\",\r\n  \"message\": \"Wagwannnnnnn\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/C17640/room/message"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/C17640/room/message?id=52a73d38-ad07-43a5-9b76-9063b13f4a66",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "id",
+						"value": "52a73d38-ad07-43a5-9b76-9063b13f4a66",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/C17640/room/message?id=52a73d38-ad07-43a5-9b76-9063b13f4a66",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"C17640",
+						"room",
+						"message"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "52a73d38-ad07-43a5-9b76-9063b13f4a66"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

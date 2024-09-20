@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Tabla Rooms -->
+    <changeSet id="1" author="Luis Daniel Solano">
+        <createTable tableName="c17640_rooms">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Tabla Users -->
+    <changeSet id="2" author="Luis Daniel Solano">
+        <createTable tableName="c17640_users">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="alias" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="room_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!-- Clave foránea después de crear la tabla -->
+        <addForeignKeyConstraint
+                baseColumnNames="room_id"
+                baseTableName="c17640_users"
+                constraintName="fk_users_rooms"
+                referencedColumnNames="id"
+                referencedTableName="c17640_rooms"/>
+    </changeSet>
+
+    <!-- Tabla Messages -->
+    <changeSet id="3" author="Luis Daniel Solano">
+        <createTable tableName="c17640_messages">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="message" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_on" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!-- Clave foránea después de crear la tabla -->
+        <addForeignKeyConstraint
+                baseColumnNames="user_id"
+                baseTableName="c17640_messages"
+                constraintName="fk_messages_users"
+                referencedColumnNames="id"
+                referencedTableName="c17640_users"/>
+    </changeSet>
+
+</databaseChangeLog>
