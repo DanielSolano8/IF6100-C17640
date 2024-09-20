@@ -36,9 +36,9 @@ public class JoinRoomController {
         //Manejo de posibles errores
         String result = roomHandler.joinRoom(roomId, alias);
 
-        //Si empieza con "El" y no es null hay un error
+        //Si empieza con "Error" y no es null hay un error
         if (result != null && result.startsWith("Error")) {
-            // Si es un error, devolver una respuesta con código de estado BAD_REQUEST (400) y el mensaje de error
+            // Si es un error, devolver una respuesta con código de estado BAD_REQUEST y el mensaje de error
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", result));
         }
 
