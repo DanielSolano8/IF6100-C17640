@@ -1,10 +1,12 @@
 package ucr.ac.lab02.C17630.room.handlers;
 
 import org.springframework.stereotype.Component;
+
 import ucr.ac.lab02.C17630.room.jpa.RoomEntity;
 import ucr.ac.lab02.C17630.room.jpa.RoomRepository;
 import ucr.ac.lab02.C17630.room.jpa.UserRepository;
 import ucr.ac.lab02.C17630.room.jpa.UserEntity;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -21,17 +23,21 @@ public class RoomHandler {
 
     public String createRoom(String name, String createdBy) {
         if (name == null || name.isEmpty()) {
-            return "El nombre de la sala no puede ser vacío."; // Mensaje descriptivo
+            return "Error,el nombre de la sala no puede estar vacío."; // Se envía un mensaje
         }
         if (createdBy == null || createdBy.isEmpty()) {
-            return "El alias del creador no puede ser vacío."; // Mensaje descriptivo
+            return "Error,el alias del creador no puede estar vacío."; // Se envía un mensaje
         }
 
         RoomEntity room = new RoomEntity();
+
         room.setName(name);
         room.setCreatedBy(createdBy);
+
+        // Generar un identificador único para la sala usando UUID y convertirlo a String
         room.setIdentifier(UUID.randomUUID().toString());
 
+        // Guardar la entidad RoomEntity en la base de datos utilizando el repositorio
         roomRepository.save(room);
 
         // Agregar al creador automáticamente a la sala
@@ -41,37 +47,37 @@ public class RoomHandler {
 
         userRepository.save(creator);
 
-        return room.getIdentifier(); // Retorna el identificador único generado
+        return room.getIdentifier(); // Se retorna el identificador
     }
 
+    //Manejo de excepciones mediante un String para el controller
     public String joinRoom(String roomId, String alias) {
         if (roomId == null || roomId.isEmpty()) {
-            return "El identificador de la sala no puede ser vacío."; // Mensaje descriptivo
+            return "Error,el identificador de la sala no puede estar vacío."; //  Se envía un mensaje
         }
         if (alias == null || alias.isEmpty()) {
-            return "El alias no puede ser vacío."; // Mensaje descriptivo
+            return "Error,el alias no puede estar vacío."; //  Se envía un mensaje
         }
 
         RoomEntity room = roomRepository.findByIdentifier(roomId).orElse(null);
         if (room == null) {
-            return "El identificador de la sala no es válido."; // Mensaje descriptivo
+            return "Error,el identificador de la sala no es válido, intentelo de nuevo."; // Se envía un mensaje
         }
 
-        boolean aliasExists = userRepository.findByRoom(room)
-                .stream()
-                .anyMatch(user -> user.getAlias().equals(alias));
+        //Verificar si el alias se repite
+        boolean aliasExists = userRepository.findByRoom(room).stream().anyMatch(user -> user.getAlias().equals(alias));
         if (aliasExists) {
-            return "El alias ya existe en la sala."; // Mensaje descriptivo
+            return "Error,el alias ingresado ya se encuentra en la sala."; //  Se envía un mensaje
         }
 
-        // Crear nuevo usuario y añadirlo a la sala
+        // Creación del usuario e ingreso a la sala existente
         UserEntity user = new UserEntity();
         user.setAlias(alias);
         user.setRoom(room);
 
         userRepository.save(user);
 
-        return null; // Retorna null si no hubo errores
+        return null; //Null si no hubo algún error
     }
 
     public RoomEntity getRoomByIdentifier(String roomId) {

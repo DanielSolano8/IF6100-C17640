@@ -1,13 +1,16 @@
 package ucr.ac.lab02.C17630.room.handlers;
 
 import org.springframework.stereotype.Component;
+
 import ucr.ac.lab02.C17630.room.jpa.RoomEntity;
 import ucr.ac.lab02.C17630.room.jpa.RoomRepository;
 import ucr.ac.lab02.C17630.room.jpa.UserRepository;
 import ucr.ac.lab02.C17630.room.jpa.UserEntity;
 import ucr.ac.lab02.C17630.room.jpa.MessageRepository;
 import ucr.ac.lab02.C17630.room.jpa.MessageEntity;
+
 import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,20 +28,22 @@ public class MessageHandler {
         this.messageRepository = messageRepository;
     }
 
+    //Manejo de los errores mediante un String
     public String sendMessage(String roomId, String alias, String messageContent) {
+
         if (roomId == null || roomId.isEmpty()) {
-            return "El identificador de la sala no puede ser vacío."; // Mensaje descriptivo
+            return "Error,el identificador de la sala no puede ser vacío."; // Mensaje
         }
         if (alias == null || alias.isEmpty()) {
-            return "El alias no puede ser vacío."; // Mensaje descriptivo
+            return "Error,el alias no puede ser vacío."; // Mensaje
         }
         if (messageContent == null || messageContent.isEmpty()) {
-            return "El mensaje no puede ser vacío."; // Mensaje descriptivo
+            return "Error,el mensaje no puede ser vacío."; // Mensaje
         }
 
         RoomEntity room = roomRepository.findByIdentifier(roomId).orElse(null);
         if (room == null) {
-            return "El identificador de la sala no es válido."; // Mensaje descriptivo
+            return "Error,el identificador de la sala no es válido."; // Mensaje
         }
 
         UserEntity user = userRepository.findByRoom(room)
@@ -48,7 +53,7 @@ public class MessageHandler {
                 .orElse(null);
 
         if (user == null) {
-            return "El alias no es válido."; // Mensaje descriptivo
+            return "Error,el alias no es válido."; // Mensaje
         }
 
         MessageEntity message = new MessageEntity();
@@ -58,17 +63,17 @@ public class MessageHandler {
 
         messageRepository.save(message);
 
-        return null; // No error
+        return null; // No hubo error
     }
 
     public List<MessageEntity> getMessages(String roomId) {
         if (roomId == null || roomId.isEmpty()) {
-            return Collections.emptyList(); // Mensaje descriptivo
+            return Collections.emptyList(); // Mensaje
         }
 
         RoomEntity room = roomRepository.findByIdentifier(roomId).orElse(null);
         if (room == null) {
-            return Collections.emptyList(); // Sala no existe
+            return Collections.emptyList(); // Sala no existente
         }
 
         List<MessageEntity> messages = new ArrayList<>();
@@ -76,7 +81,7 @@ public class MessageHandler {
             messages.addAll(messageRepository.findByUser(user));
         }
 
-        return messages; // Devuelve los mensajes en la sala
+        return messages; // Devuelve los mensajes dentro de  la sala
     }
 
 }

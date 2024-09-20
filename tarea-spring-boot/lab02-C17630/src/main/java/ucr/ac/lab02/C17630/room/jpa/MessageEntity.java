@@ -1,4 +1,5 @@
 package ucr.ac.lab02.C17630.room.jpa;
+
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 

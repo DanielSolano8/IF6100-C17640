@@ -6,7 +6,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <!-- Tabla Rooms -->
+    <!--Creación de Tabla de los Rooms -->
     <changeSet id="1" author="Luis Daniel Solano">
         <createTable tableName="c17640_rooms">
             <column name="id" type="BIGINT" autoIncrement="true">
@@ -18,7 +18,7 @@
         </createTable>
     </changeSet>
 
-    <!-- Tabla Users -->
+    <!-- Creación de Tabla para los Users -->
     <changeSet id="2" author="Luis Daniel Solano">
         <createTable tableName="c17640_users">
             <column name="id" type="BIGINT" autoIncrement="true">
@@ -32,7 +32,7 @@
             </column>
         </createTable>
 
-        <!-- Clave foránea después de crear la tabla -->
+        <!-- Añadir foreign key de room_id -->
         <addForeignKeyConstraint
                 baseColumnNames="room_id"
                 baseTableName="c17640_users"
@@ -41,7 +41,7 @@
                 referencedTableName="c17640_rooms"/>
     </changeSet>
 
-    <!-- Tabla Messages -->
+    <!-- Creación de Tabla de Messages -->
     <changeSet id="3" author="Luis Daniel Solano">
         <createTable tableName="c17640_messages">
             <column name="id" type="BIGINT" autoIncrement="true">
@@ -58,7 +58,7 @@
             </column>
         </createTable>
 
-        <!-- Clave foránea después de crear la tabla -->
+        <!-- Añadir foreign key de user_id -->
         <addForeignKeyConstraint
                 baseColumnNames="user_id"
                 baseTableName="c17640_messages"
