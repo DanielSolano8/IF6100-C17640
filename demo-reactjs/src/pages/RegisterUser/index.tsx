@@ -16,6 +16,12 @@ const RegisterUser = () => {
 				<Form.Item name='password' rules={rules.password}>
 					<Input placeholder='Contraseña' type='password' />
 				</Form.Item>
+				<Form.Item
+					name='passwordConfirmation'
+					rules={rules.passwordConfirmation}
+				>
+					<Input placeholder='Contraseña' type='password' />
+				</Form.Item>
 				<Button type='primary' htmlType='submit'>
 					Registrar
 				</Button>
@@ -24,3 +30,4 @@ const RegisterUser = () => {
 	);
 };
 export default RegisterUser;
+
