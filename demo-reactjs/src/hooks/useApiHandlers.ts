@@ -2,7 +2,7 @@ import { AxiosError } from 'axios';
 import { ErrorResponse } from '../models/api.models';
 //import { useSessionHandler } from './useSessionHandler';
 export const useApiHandler = () => {
-//	const { clearSession } = useSessionHandler();
+	//	const { clearSession } = useSessionHandler();
 
 	const handleMutation = async <TInput, TResult>(
 		call: (input: TInput) => Promise<TResult>,
@@ -22,7 +22,7 @@ export const useApiHandler = () => {
 				const error = result?.data as ErrorResponse;
 				if (error != null) {
 					if (error.code === 40103) {
-					//	clearSession();
+						//	clearSession();
 					}
 					message = error.message;
 					isError = true;
@@ -50,7 +50,7 @@ export const useApiHandler = () => {
 				const error = result?.data as ErrorResponse;
 				if (error != null) {
 					if (error.code === 40103) {
-					//	clearSession();
+						//	clearSession();
 					}
 					message = error.message;
 					isError = true;
@@ -63,4 +63,3 @@ export const useApiHandler = () => {
 
 	return { handleMutation, handleQuery };
 };
-

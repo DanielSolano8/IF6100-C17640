@@ -7,7 +7,6 @@ export type OkResponse = {
 	status: string;
 };
 
-
 export type Response = {
-    result: string;
+	result: string;
 };
